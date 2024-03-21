@@ -1,2 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using lab1;
+using lab1.Enums;
+internal class Program
+{
+
+    private static void Main(string[] args)
+    {
+       
+    }
+}
