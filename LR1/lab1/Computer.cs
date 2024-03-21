@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using static lab1.Enums.manufacturer;
-using static lab1.Enums.Type_CPU;
-using static lab1.Enums.Type_OS;
+﻿using lab1.Enums;
 
 namespace lab1
 {
@@ -14,37 +8,37 @@ namespace lab1
         private bool _isOverclocked = false;
         private int _cpuF;
         private int _ramSize;
-        private type_OS _typeOS;
-        private type_cpu _typeCPU;
-        private name_manufacturer _nameMnfctr;
-        public List<string> installed_soft { get; set; }
-        public List<string> users { get; set; }
+        private TypeOs _typeOS;
+        private TypeCpu _typeCPU;
+        private Enums.Mnfctrr _nameMnfctr;
+        public List<string> InstalledSoft { get; set; }
+        public List<string> Users { get; set; }
 
 
         #endregion
-        public type_cpu typeCPU
+        public TypeCpu TypeCpu
         {
             get => _typeCPU;
             set { _typeCPU = value; }
         }
-        public name_manufacturer nameMnfctr
+        public Enums.Mnfctrr NameMnfctr
         {
             get => _nameMnfctr;
             set { _nameMnfctr = value; }
         }
       
-        public type_OS typeOS
+        public TypeOs TypeOs
         {
             get => _typeOS;
             set { _typeOS = value; }
         }
 
-        public int frqncy_cpu
+        public int FrqncyCpu
         {
             get => _cpuF;
             set { _cpuF = value; }
         }
-        public int ramSize
+        public int RamSize
         {
             get => _ramSize;
             set { _ramSize = value; }
@@ -53,34 +47,34 @@ namespace lab1
         public Computer()
         {
             Random rnd = new Random();
-            _typeCPU = (type_cpu)rnd.Next(0, 2);
+            _typeCPU = (TypeCpu)rnd.Next(0, 2);
             _cpuF = rnd.Next(3, 6);
             int randnomNumber = rnd.Next(1, 5);
 
             _ramSize = randnomNumber*8;
-            _typeOS = (type_OS)rnd.Next(0, 3);
+            _typeOS = (TypeOs)rnd.Next(0, 3);
 
 
-            _nameMnfctr = (name_manufacturer)rnd.Next(0, 6);
+            _nameMnfctr = (Enums.Mnfctrr)rnd.Next(0, 6);
 
-            installed_soft = new List<string>();
-            users = new List<string>();
+            InstalledSoft = new List<string>();
+            Users = new List<string>();
             int numberOfUsers = rnd.Next(0, 11);
             for (int i = 0;i < numberOfUsers;i++)
             {
-                users.Add($"User {i+1}");
-                installed_soft.Add($"Software {i+1}");
+                Users.Add($"User {i+1}");
+                InstalledSoft.Add($"Software {i+1}");
             }
         }
-        public Computer(type_cpu typeCPU, int cpuF, int ramSize, type_OS type_OS, name_manufacturer name_Manufacturer, List<string> users, List<string> installedSoft)
+        public Computer(TypeCpu typeCPU, int cpuF, int ramSize, TypeOs type_OS, Enums.Mnfctrr name_Manufacturer, List<string> users, List<string> installedSoft)
         {
             _typeCPU = typeCPU;
             _cpuF = cpuF;
             _ramSize = ramSize;
             _typeOS = type_OS;
             _nameMnfctr = name_Manufacturer;
-            this.users = users;
-            installed_soft = installedSoft;
+            this.Users = users;
+            InstalledSoft = installedSoft;
 
         }
         #endregion
@@ -105,13 +99,13 @@ namespace lab1
         {
             if (_isOverclocked == false)
             {
-                if (_typeCPU == type_cpu.Intel)
+                if (_typeCPU == TypeCpu.Intel)
                 {
                     _cpuF += 1;
 
 
                 }
-                else if (_typeCPU == type_cpu.Ryzen)
+                else if (_typeCPU == TypeCpu.Ryzen)
                 {
                     _cpuF += 1;
                 }

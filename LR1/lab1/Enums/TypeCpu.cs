@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace lab1.Enums
 {
-    internal class Type_CPU
-    {
-        public enum type_cpu : byte
+
+        public enum TypeCpu : byte
         {
             Ryzen = 0,
             Intel = 1
-        }
-    }
+       }
+    
 }

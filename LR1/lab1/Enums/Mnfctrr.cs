@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace lab1.Enums
 {
-    internal class manufacturer
-    {
-        public enum name_manufacturer : byte
+
+        public enum Mnfctrr : byte
         {
             Acer = 0,
             HyperX = 4,
@@ -18,5 +17,5 @@ namespace lab1.Enums
             Ardor = 1
 
         }
-    }
+
 }

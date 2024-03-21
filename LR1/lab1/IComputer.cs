@@ -8,12 +8,12 @@ namespace lab1
 {
     internal interface IComputer
     {
-        enum type_cpu;
-        enum name_manufacturer;
-        enum type_OS;
-        public int frqncy_cpu { get; set; }
-        public int ramSize { get; set; }
-        public List<string> installed_soft { get; set; }
-        public List<string> users { get; set; }
+        enum TypeCpu;
+        enum Mnfctrr;
+        enum TypeOs;
+        public int FrqncyCpu { get; set; }
+        public int RamSize { get; set; }
+        public List<string> InstalledSoft { get; set; }
+        public List<string> Users { get; set; }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using lab1;
-using System;
-using System.Linq;
-using static lab1.Enums.manufacturer;
+using lab1.Enums;
 internal class Program
 {
 
@@ -10,37 +8,37 @@ internal class Program
         List<Computer> computers = Computer.Generate100();
 
         #region Exersice 2
-        var FilteredByTypeCpu = computers.Where(comp => comp.typeCPU == lab1.Enums.Type_CPU.type_cpu.Ryzen).ToList();
+        var FilteredByTypeCpu = computers.Where(comp => comp.TypeCpu == TypeCpu.Ryzen).ToList();
         foreach (var computer in FilteredByTypeCpu)
-            Console.WriteLine($"Type: {computer.typeCPU}, Manufacturer: {computer.nameMnfctr}, RAM: {computer.ramSize}GB, OS: {computer.typeOS}");
+            Console.WriteLine($"Type: {computer.TypeCpu}, Manufacturer: {computer.NameMnfctr}, RAM: {computer.RamSize}GB, OS: {computer.TypeOs}");
         Console.WriteLine("-------------------------------------------");
-        var FilteredByTypeCpuAndManufacturer = computers.Where(comp => comp.typeCPU == lab1.Enums.Type_CPU.type_cpu.Ryzen && comp.nameMnfctr == lab1.Enums.manufacturer.name_manufacturer.MSI).ToList();
+        var FilteredByTypeCpuAndManufacturer = computers.Where(comp => comp.TypeCpu == TypeCpu.Ryzen && comp.NameMnfctr == Mnfctrr.MSI).ToList();
         foreach (var computer in FilteredByTypeCpuAndManufacturer)
-            Console.WriteLine($"Type: {computer.typeCPU}, Manufacturer: {computer.nameMnfctr}, RAM: {computer.ramSize}GB, OS: {computer.typeOS}");
+            Console.WriteLine($"Type: {computer.TypeCpu}, Manufacturer: {computer.NameMnfctr}, RAM: {computer.RamSize}GB, OS: {computer.TypeOs}");
         Console.WriteLine("-------------------------------------------");
-        var FilteredByUsersAndRamSize = computers.Where(comp => comp.users.Count < 4 && comp.ramSize > 8).ToList();
+        var FilteredByUsersAndRamSize = computers.Where(comp => comp.Users.Count < 4 && comp.RamSize > 8).ToList();
         foreach (var computer in FilteredByUsersAndRamSize)
-            Console.WriteLine($"Type: {computer.typeCPU}, Manufacturer: {computer.nameMnfctr}, RAM: {computer.ramSize}GB, OS: {computer.typeOS} Users: {computer.users.Count}");
+            Console.WriteLine($"Type: {computer.TypeCpu}, Manufacturer: {computer.NameMnfctr}, RAM: {computer.RamSize}GB, OS: {computer.TypeOs} Users: {computer.Users.Count}");
         Console.WriteLine("-------------------------------------------");
         #endregion
 
         #region Exersice 3
-        var SortedComputerByTypeCpu1 = computers.OrderBy(comp => comp.typeCPU).ToList();
+        var SortedComputerByTypeCpu1 = computers.OrderBy(comp => comp.TypeCpu).ToList();
         foreach (var computer in SortedComputerByTypeCpu1)
-            Console.WriteLine($"Type CPU: {computer.typeCPU}, CPU Frequency: {computer.frqncy_cpu}");
+            Console.WriteLine($"Type CPU: {computer.TypeCpu}, CPU Frequency: {computer.FrqncyCpu}");
         Console.WriteLine("-------------------------------------------");
 
-        var SortedComputerByTypeCpuAndNameManufacturer = computers.OrderBy(comp=>comp.typeCPU).ThenBy(comp => comp.nameMnfctr).ToList();
+        var SortedComputerByTypeCpuAndNameManufacturer = computers.OrderBy(comp=>comp.TypeCpu).ThenBy(comp => comp.NameMnfctr).ToList();
         foreach (var computer in SortedComputerByTypeCpuAndNameManufacturer)
-            Console.WriteLine($"Type CPU: {computer.typeCPU}, Manufacturer: {computer.nameMnfctr}");
+            Console.WriteLine($"Type CPU: {computer.TypeCpu}, Manufacturer: {computer.NameMnfctr}");
         #endregion
 
         #region Exersice 4
         var selectedData = computers.Select(comp => new
         {
-            CPUFrequency = comp.frqncy_cpu,
-            RAMSize = comp.ramSize,
-            InstalledSoftware = comp.installed_soft
+            CPUFrequency = comp.FrqncyCpu,
+            RAMSize = comp.RamSize,
+            InstalledSoftware = comp.InstalledSoft
         }).ToList();
 
         // Вывод результатов
@@ -50,20 +48,20 @@ internal class Program
         #region Exersice 5
         List<Manufacturer> manufacturers = new List<Manufacturer>
         {
-            new Manufacturer( (name_manufacturer)2,120, Manufacturer.country.Russia),
-            new Manufacturer( (name_manufacturer)5,34, Manufacturer.country.Kazakhstan),
-            new Manufacturer( (name_manufacturer)1,73, Manufacturer.country.USA),
-           new Manufacturer(  (name_manufacturer)4,73, Manufacturer.country.USA)
+            new Manufacturer( (Mnfctrr)2,120, Country.Russia),
+            new Manufacturer( (Mnfctrr)5,34, Country.Kazakhstan),
+            new Manufacturer( (Mnfctrr)1,73, Country.USA),
+           new Manufacturer(  (Mnfctrr)4,73, Country.USA)
 
 
         };
 
         var innerJoinResult = computers.Join(manufacturers, 
-            comp => comp.nameMnfctr,
+            comp => comp.NameMnfctr,
             manuf => manuf.Name, 
             (comp, manuf) => new
             {
-                ComputerName = comp.nameMnfctr,
+                ComputerName = comp.NameMnfctr,
                 ManufacturerName = manuf.Name,
                 ManufacturerCountry = manuf.Country
             }).ToList();
