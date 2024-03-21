@@ -2,8 +2,74 @@
 
 namespace lab1
 {
+    
     internal class Computer : IComputer, IOverclock
     {
+        #region delegates
+        public delegate void NewUserHandler(string message);
+        public delegate void ReplaceCpuHandler(string message);
+        public delegate void SetupNewSoftHandler(string message);
+        public delegate void ReplaceRamSizeHandler(string message);
+
+        private NewUserHandler? newUserHandler;
+        private ReplaceCpuHandler? replaceCpuHandler;
+        private SetupNewSoftHandler? setupNewSoftHandler;
+        private ReplaceRamSizeHandler? replaceRamSizeHandler;
+        #endregion
+        #region Events
+        public event NewUserHandler NewUserEvent
+        {
+            add
+            {
+                newUserHandler += value;
+                Console.WriteLine($"Добавлен обработчик нового пользователя: {value.Method.Name}");
+            }
+            remove
+            {
+                newUserHandler -= value;
+                Console.WriteLine($"Удален обработчик нового пользователя: {value.Method.Name}");
+            }
+        }
+        public event ReplaceCpuHandler ReplaceCpuEvent
+        {
+            add
+            {
+                replaceCpuHandler += value;
+                Console.WriteLine($"Добавлен обработчик нового процессора: {value.Method.Name}");
+            }
+            remove
+            {
+                replaceCpuHandler -= value;
+                Console.WriteLine($"Удален обработчик нового процессора: {value.Method.Name}");
+            }
+        }
+        public event SetupNewSoftHandler SetupNewSoftEvent
+        {
+            add
+            {
+                setupNewSoftHandler += value;
+                Console.WriteLine($"Добавлен обработчик нового ПО: {value.Method.Name}");
+            }
+            remove
+            {
+                setupNewSoftHandler -= value;
+                Console.WriteLine($"Удален обработчик нового ПО: {value.Method.Name}");
+            }
+        }
+        public event ReplaceRamSizeHandler ReplaceRamSizeEvent
+        {
+            add
+            {
+                replaceRamSizeHandler += value;
+                Console.WriteLine($"Добавлен обработчик замены ОЗУ: {value.Method.Name}");
+            }
+            remove
+            {
+                replaceRamSizeHandler -= value;
+                Console.WriteLine($"Удален обработчик замены ОЗУ: {value.Method.Name}");
+            }
+        }
+        #endregion
         #region variables
         private bool _isOverclocked = false;
         private int _cpuF;
@@ -16,6 +82,7 @@ namespace lab1
 
 
         #endregion
+        #region GetsSets
         public TypeCpu TypeCpu
         {
             get => _typeCPU;
@@ -43,6 +110,7 @@ namespace lab1
             get => _ramSize;
             set { _ramSize = value; }
         }
+        #endregion
         #region constructors
         public Computer()
         {
@@ -78,6 +146,30 @@ namespace lab1
 
         }
         #endregion
+        #region Methods
+        public void NewUser()
+        {
+            Users.Add($"User {Users.Count + 1}");
+            newUserHandler?.Invoke("Добавлен новый пользователь.");
+        }
+        public void ReplaceCpu(TypeCpu newCpu)
+        {
+            TypeCpu oldCpu = _typeCPU;
+            _typeCPU = newCpu;
+            replaceCpuHandler?.Invoke($"Процессор был заменен с {oldCpu} на {newCpu}.");
+        }
+        public void SetupNewSoft()
+        {
+            InstalledSoft.Add($"Software {InstalledSoft.Count + 1} ");
+            setupNewSoftHandler?.Invoke($"Было установлено новое ПО");
+
+        }
+        public void ReplaceRam(int newRamSize) 
+        { 
+            int oldRamSize = _ramSize;
+            _ramSize = newRamSize;
+            replaceRamSizeHandler?.Invoke($"Опертивная память была заменена с {oldRamSize} на {newRamSize}");
+        }
         public static Computer GenerateComputer() => new Computer();
         public static List<Computer> Generate100()
         {
@@ -88,13 +180,6 @@ namespace lab1
             }
             return computers;
         }
-
-
-      
-       
-
-      
-
         public string OverclockTheComputer()
         {
             if (_isOverclocked == false)
@@ -116,6 +201,7 @@ namespace lab1
             
 
         }
+        #endregion
 
     }
 }
