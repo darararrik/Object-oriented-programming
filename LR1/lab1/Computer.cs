@@ -4,7 +4,7 @@ namespace lab1
 {
     internal class Computer : IComputer, IOverclock
     {
-        #region variables
+        #region Variables
         private bool _isOverclocked = false;
         private int _cpuF;
         private int _ramSize;
@@ -16,6 +16,7 @@ namespace lab1
 
 
         #endregion
+        #region Gets and Sets
         public TypeCpu TypeCpu
         {
             get => _typeCPU;
@@ -43,7 +44,8 @@ namespace lab1
             get => _ramSize;
             set { _ramSize = value; }
         }
-        #region constructors
+        #endregion
+        #region Constructors
         public Computer()
         {
             Random rnd = new Random();
@@ -78,6 +80,7 @@ namespace lab1
 
         }
         #endregion
+        #region Methods
         public static Computer GenerateComputer() => new Computer();
         public static List<Computer> Generate100()
         {
@@ -118,5 +121,6 @@ namespace lab1
         }
 
     }
+    #endregion
 }
 
