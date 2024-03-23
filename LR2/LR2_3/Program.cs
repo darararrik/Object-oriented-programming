@@ -17,7 +17,7 @@ internal class Program
         computer.NewUserEvent -= HandleNewUserEvent;
         computer.ReplaceCpuEvent -= HandleReplaceCpuEvent;
         computer.SetupNewSoftEvent -= HandleInstallSoftEvent;
-        computer.ReplaceRamSizeEvent -= HandleReplaceRamSizeEvent;
+        computer.ReplaceRamSizeEvent -= HandleReplaceRamSizeEvent
 
 
 

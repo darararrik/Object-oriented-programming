@@ -1,12 +1,4 @@
 ﻿
-
-
-
-
-
-
-
-
 internal class Program
 {
     public delegate double MyDel(int[] a);
@@ -25,7 +17,7 @@ internal class Program
         MyDel myDelegate = new MyDel(AverageDelegate);
         int[] numbers = { 1, 2,3 };
         double res = myDelegate(numbers);
-
+        Console.WriteLine(res);
 
     }
 
